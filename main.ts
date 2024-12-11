@@ -1,31 +1,41 @@
-import { difference } from '@std/datetime';
-
-/**
- * Runs the current day
- */
-const runCurrentDay = async () => {
-    const currentDay = new Date();
-    const firstDay = new Date('2024-12-01T00:00:00Z');
-    const differenceInDays = (difference(currentDay, firstDay).days ?? 0) + 1;
-    const paddedDifference = differenceInDays.toString().padStart(2, '0');
-    const fullPath = `./${currentDay.getFullYear()}\\${paddedDifference}\\index.ts`;
-    const dayModule = await import(fullPath);
-    dayModule.runProblem();
-};
-
-/**
- * Runs a specified day by passing the day and year
- * @param day
- * @param year
- */
-// deno-lint-ignore no-unused-vars
-const runDay = async (day: string, year: string = '2024') => {
-    const dayFixed = day.length === 2 ? day : `0${day}`;
-    const fullPath = `./${year}\\${dayFixed}\\index.ts`;
-    const dayModule = await import(fullPath);
-    dayModule.runProblem();
-};
+import { parseArgs } from '@std/cli/parse-args';
+import { createDay } from './src/createDay.ts';
+import { runDay } from './src/runDay.ts';
 
 if (import.meta.main) {
-    runCurrentDay();
+    const args = parseArgs(Deno.args, {
+        alias: {
+            help: ['h'],
+            create: ['c'],
+            day: ['d'],
+            year: ['y'],
+        },
+        string: ['day', 'year'],
+        unknown: (arg) => {
+            console.log(`Found an illegal option, ignoring option "${arg}"!`);
+            return false;
+        },
+    });
+    if (args['help']) {
+        console.log(
+            'Welcome to Jonas AoC create and run script or short ACARS!'
+        );
+        console.log('-----------');
+        console.log(
+            'Run the command with --create or -c to create a new folder for the current or chosen day.'
+        );
+        console.log('-----------');
+        console.log(
+            'Run the command with --day or -d to set the target day. If no day is given this defaults to the current day.'
+        );
+        console.log('-----------');
+        console.log(
+            'Run the command with --year or -y to set the target year. Defaults to the current year'
+        );
+    } else if (args['create']) {
+        createDay(args['day'], args['year']);
+    } else {
+        runDay(args['day'], args['year']);
+    }
+    // runCurrentDay();
 }

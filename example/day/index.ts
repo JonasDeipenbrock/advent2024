@@ -1,4 +1,4 @@
-import { readInput } from '../../helpers/readInput.ts';
+import { readInput } from '../../src/helpers/readInput.ts';
 
 export const runProblem = () => {
     console.log('Example: ' + runPartOne(readInput('2024/01/example.txt')));
