@@ -3,10 +3,6 @@ import { readInput } from '../../helpers/readInput.ts';
 export const runProblem = () => {
     console.log('Example: ' + runPartOne(readInput('src/2024/06/example.txt')));
     console.log('1: ' + runPartOne(readInput('src/2024/06/input.txt')));
-    // console.log(
-    //     'Example 2: ' + runPartTwo(readInput('src/2024/06/example.txt'))
-    // );
-    // console.log('2: ' + runPartTwo(readInput('src/2024/06/input.txt')));
 };
 
 const ROTATION_MATRIX_90 = [
