@@ -23,34 +23,6 @@ const runPartOne = (input: string) => {
 
     const gridX = lines.length;
     const gridY = lines[0].length;
-    // const startIndex = grid.findIndex((pos) => pos === '^');
-    // let curPos = startIndex;
-    // visitedPos.set(curPos, 1);
-    // while (true) {
-    //     const curY = curPos % gridX;
-    //     // const curX = Math.floor(curPos / gridY);
-
-    //     let nextPos = curPos + direction[0] * gridX + direction[1] * 1;
-    //     let nextSymbol = grid[nextPos];
-    //     while (nextSymbol === '#') {
-    //         direction = matrixMult(ROTATION_MATRIX_90, direction);
-    //         nextPos = curPos + direction[0] * gridX + direction[1] * 1;
-    //         nextSymbol = grid[nextPos];
-    //     }
-    //     //if y = 0 && direction is left => break
-    //     if (curY === 0 && direction[1] === -1) {
-    //         break;
-    //     }
-    //     //if y = gridY && direction is right => break
-    //     if (curY === gridY - 1 && direction[1] === 1) {
-    //         break;
-    //     }
-    //     if (nextPos < 0 || nextPos > gridX * gridY) {
-    //         break;
-    //     }
-    //     curPos = nextPos;
-    //     visitedPos.set(curPos, (visitedPos.get(curPos) ?? 0) + 1);
-    // }
     const visitedTiles = gameLoop(grid, gridX, gridY);
     const savedBasePath = new Map(visitedPos);
     let foundLoops = 0;
@@ -122,12 +94,5 @@ const runPartTwo = (input: string) => {
 };
 
 const matrixMult = (a: number[][], b: number[]) => {
-    /*
-
-        1
-        2
-    1 2
-    3 4
-    */
     return [a[0][0] * b[0] + a[0][1] * b[1], a[1][0] * b[0] + a[1][1] * b[1]];
 };
