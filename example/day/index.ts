@@ -10,7 +10,7 @@ export const runProblem = () => {
 };
 
 const runPartOne = (input: string) => {
-    const lines = input.split('\n');
+    const lines = input.split('\n').map((line) => line.trim());
     let result = 0;
 
     lines.forEach((line) => {});
