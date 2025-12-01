@@ -1,12 +1,13 @@
 import { parseArgs } from '@std/cli/parse-args';
-import { createDay } from './src/createDay.ts';
-import { runDay } from './src/runDay.ts';
+import { createDay } from './src/lib/cli-tools/createDay.ts';
+import { runDay } from './src/lib/cli-tools/runDay.ts';
 
 if (import.meta.main) {
     const args = parseArgs(Deno.args, {
         alias: {
             help: ['h'],
             create: ['c'],
+            run: ['r'],
             day: ['d'],
             year: ['y'],
         },
@@ -34,8 +35,9 @@ if (import.meta.main) {
         );
     } else if (args['create']) {
         createDay(args['day'], args['year']);
-    } else {
+    } else if (args['run']) {
         runDay(args['day'], args['year']);
+    } else {
     }
     // runCurrentDay();
 }

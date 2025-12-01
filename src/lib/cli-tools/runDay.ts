@@ -1,5 +1,8 @@
-import { getCurrentDayInMonth, getCurrentYear } from './helpers/dateUtils.ts';
-import { getFullPath } from './helpers/getFullPath.ts';
+import {
+    getCurrentDayInMonth,
+    getCurrentYear,
+} from '../../helpers/dateUtils.ts';
+import { getFullPath } from '../../helpers/getFullPath.ts';
 
 export const runDay = async (day?: string, year?: string) => {
     if (!day) {
