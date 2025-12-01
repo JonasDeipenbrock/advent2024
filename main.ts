@@ -1,22 +1,10 @@
-import { parseArgs } from '@std/cli/parse-args';
 import { createDay } from './src/lib/cli-tools/createDay.ts';
+import { interactiveRunning } from './src/lib/cli-tools/interactive.ts';
+import { parseAocArgs } from './src/lib/cli-tools/read-args.ts';
 import { runDay } from './src/lib/cli-tools/runDay.ts';
 
 if (import.meta.main) {
-    const args = parseArgs(Deno.args, {
-        alias: {
-            help: ['h'],
-            create: ['c'],
-            run: ['r'],
-            day: ['d'],
-            year: ['y'],
-        },
-        string: ['day', 'year'],
-        unknown: (arg) => {
-            console.log(`Found an illegal option, ignoring option "${arg}"!`);
-            return false;
-        },
-    });
+    const args = parseAocArgs(Deno.args);
     if (args['help']) {
         console.log(
             'Welcome to Jonas AoC create and run script or short ACARS!'
@@ -38,6 +26,7 @@ if (import.meta.main) {
     } else if (args['run']) {
         runDay(args['day'], args['year']);
     } else {
+        interactiveRunning(args);
     }
     // runCurrentDay();
 }

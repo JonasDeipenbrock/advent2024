@@ -3,8 +3,9 @@ import {
     getCurrentYear,
 } from '../../helpers/dateUtils.ts';
 import { getFullPath } from '../../helpers/getFullPath.ts';
+import { join, normalize } from '@std/path';
 
-export const createDay = (day?: string, year?: string) => {
+export const createDay = async (day?: string, year?: string) => {
     if (!day) {
         day = getCurrentDayInMonth();
     }
@@ -12,9 +13,12 @@ export const createDay = (day?: string, year?: string) => {
         year = getCurrentYear();
     }
     const path = getFullPath(day, year);
-    console.log(path);
-    //create input file
 
+    //create input file
+    const normalizedPath = normalize(path);
+    console.log(normalizedPath);
+    await Deno.mkdir(join(normalizedPath, '..'), { recursive: true });
+    await Deno.writeTextFile(normalizedPath, '//auto created by cli helper');
     //download input
 
     //create example file
