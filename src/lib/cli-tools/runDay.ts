@@ -1,3 +1,4 @@
+import { normalize } from '@std/path';
 import {
     getCurrentDayInMonth,
     getCurrentYear,
@@ -12,10 +13,15 @@ export const runDay = async (day?: string, year?: string) => {
         year = getCurrentYear();
     }
     const path = getFullPath(day, year);
+    const normalizedPath = normalize(path);
+    console.log(Deno.cwd());
 
     //make sure this path exists!
 
-    const dayModule = await import(path);
+    const dayModule = await import(
+        `file:///${Deno.cwd()}/${normalizedPath}/index.ts`
+    );
+    // console.clear()
     dayModule.runProblem();
 };
 
