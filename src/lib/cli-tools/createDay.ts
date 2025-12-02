@@ -49,4 +49,6 @@ export const createDay = async (day?: string, year?: string) => {
         normalize(`${normalizedPath}/index.ts`),
         templateFileContent
     );
+    await Deno.writeTextFile(normalize(`${normalizedPath}/example.txt`), '');
+    await Deno.writeTextFile(normalize(`${normalizedPath}/input.txt`), '');
 };
